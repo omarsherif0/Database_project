@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CRUDER</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark px-4 py-md-0">
+            <a class="navbar-brand px-2" href="#">CRUDER</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <a href="#" class="nav-link">Other Link</a>
+                <a class="nav-link dropdown-toggle profile-section" href="https://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <img class="rounded-circle profile-picture img-fluid" src="https://randomuser.me/api/portraits/men/43.jpg" alt="">
+                    <span>John Doe</span>
+                    <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu border-0 rounded-0 m-0" aria-labelledby="dropdown03">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="../index.html">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 col-lg-3 col-xl-2 sidebar bg-light py-4">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <span class="d-none d-md-inline"> Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="posts.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span class="d-none d-md-inline"> Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="posts.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            <span class="d-none d-md-inline"> Posts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown mr-1" id="drp">
+                        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" data-offset="60,0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                            <span class="d-none d-md-inline"> Dropdown</span>
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                        <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuOffset">
+                            <a class="px-0 dropdown-item" href="posts.html">Action</a>
+                            <a class="px-0 dropdown-item" href="posts.html">Another action</a>
+                            <a class="px-0 dropdown-item" href="posts.html">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <main role="main" class="col-10 col-lg-9 col-xl-10 py-4 px-4">
+                <h2 class="page-title pb-3 mb-3">POSTS</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb p-0">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="posts.html">Posts</a>
+                        </li>
+                    </ol>
+                </nav>
+                <div class="page-content mt-4">
+                    <div class="content-header row m-0 py-3">
+                        <div class="col-12 col-sm-6">
+                            <h5 class="page-subtitle m-0 font-weight-bold">All Posts</h5>
+                        </div>
+                        <div class="col-12 col-sm-6 text-sm-right">
+                            <a href="new.html" class="btn btn-sm btn-info">Add New</a>
+                        </div>
+                    </div>
+                    <div class="content-wrapper table-responsive-sm">
+                        <table class="table table-striped" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,800</td>
+                                </tr>   
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script src="../js/datatables.min.js"></script>
+    <script src="../js/dataTables.bootstrap.min.js"></script>
+    <script>
+        feather.replace()
+    </script>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+html,
+body {
+  height: 100%;
+  background: #ecf0f1;
+}
+
+svg {
+    height: 1.2rem;
+}
+
+/* HEADER */
+.navbar .navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-dark .list-inline .nav-link {
+    color: #ffffff;
+    padding: 0 .2rem !important;
+}
+
+/* FORM SECTION */
+#main {
+    max-width: 330px; 
+}
+
+.login-form input[type='email'] {
+    margin: 1rem 0;
+}
+
+.signup-form input {
+    margin-bottom: 1rem;
+}

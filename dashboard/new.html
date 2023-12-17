@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CRUDER</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark px-4 py-md-0">
+            <a class="navbar-brand px-2" href="#">CRUDER</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <a href="#" class="nav-link">Other Link</a>
+                <a class="nav-link dropdown-toggle profile-section" href="https://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <img class="rounded-circle profile-picture img-fluid" src="https://randomuser.me/api/portraits/men/43.jpg" alt="">
+                    <span>John Doe</span>
+                    <i class="fas fa-angle-down"></i>
+                </a>
+                <div class="dropdown-menu border-0 rounded-0 m-0" aria-labelledby="dropdown03">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="../index.html">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 col-lg-3 col-xl-2 sidebar bg-light py-4">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <span class="d-none d-md-inline"> Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="posts.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span class="d-none d-md-inline"> Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="posts.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            <span class="d-none d-md-inline"> Posts</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown mr-1" id="drp">
+                        <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" data-offset="60,0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                            <span class="d-none d-md-inline"> Dropdown</span>
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                        <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuOffset">
+                            <a class="px-0 dropdown-item" href="posts.html">Action</a>
+                            <a class="px-0 dropdown-item" href="posts.html">Another action</a>
+                            <a class="px-0 dropdown-item" href="posts.html">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <main role="main" class="col-10 col-lg-9 col-xl-10 py-4 px-4">
+                <h2 class="page-title pb-3 mb-3">POSTS</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb p-0">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="posts.html">Posts</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Add New</li>
+                    </ol>
+                </nav>
+                <div class="page-content mt-4">
+                    <div class="content-header row m-0 py-3">
+                        <div class="col-12">
+                            <h5 class="page-subtitle m-0 font-weight-bold">Create New Post</h5>
+                        </div>
+                    </div>
+                    <div class="content-wrapper px-3 table-responsive-sm">
+                        <form>
+                            <div class="form-group row">
+                                <label for="customFile" class="col-sm-2 col-form-label" id="random_image">Photo</label>
+                                <div class="custom-file col-md-5">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                                <div class="offset-md-2 col-md-5">
+                                    <img src="../images/post.jpg" class="img-fluid" alt="">
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-md-5">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-md-5">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Textarea</label>
+                                <div class="col-md-5">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Select</label>
+                                <div class="col-md-5">
+                                    <select class="custom-select">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                                    <div class="col-md-5">
+                                        <div class="form-check m-0">
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                            <label class="form-check-label" for="gridRadios1">
+                                                First radio
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                            <label class="form-check-label" for="gridRadios2">
+                                                Second radio
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group row">
+                                <div class="col-sm-2">Checkbox</div>
+                                <div class="col-md-5">
+                                    <div class="form-check m-0">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                        <label class="form-check-label" for="gridCheck1">
+                                            Checkbox 1
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck2">
+                                        <label class="form-check-label" for="gridCheck2">
+                                            Checkbox 2 </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck3">
+                                        <label class="form-check-label" for="gridCheck3">
+                                            Checkbox 3 </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck4">
+                                        <label class="form-check-label" for="gridCheck4">
+                                            Checkbox 4 </label>
+                                    </div>
+                                    <div class="form-check m-0">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck5">
+                                        <label class="form-check-label" for="gridCheck5">
+                                            Checkbox 5 </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="customFile" class="col-sm-2 col-form-label">Upload</label>
+                                <div class="custom-file col-md-5">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-5 offset-md-2">
+                                    <div class="alert alert-success" role="alert">
+                                        Success alert !
+                                    </div>
+                                    <div class="alert alert-danger" role="alert">
+                                        Error alert !
+                                    </div>
+                                    <button type="submit" class="btn btn-block btn-primary">Create</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace()
+    </script>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>
