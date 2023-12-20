@@ -1,7 +1,12 @@
-from flask import Flask,Blueprint,render_template, request, redirect, url_for
+from flask import Blueprint,render_template, request,jsonify
+from bson import json_util
+from db import Database
+from db_operations_ import Operations
 
 app_blueprint = Blueprint('app_blueprint',__name__)
 #Variables
+db = Database()
+operations = Operations()
 checkBoxes=3
 tours = [
     {'Tour_operator':'Tiger Nixon', 'Date':'Jan 15, 2023, 10:00AM', 'Location':'Pyramids', 'Duration':'6 hours', 'Cost':'$50 per person','Availability':'7 spots'},
@@ -37,7 +42,13 @@ def new():
 def process_input():
     if request.method == "POST":
         return request.form
-        return redirect(url_for('app_blueprint.index'))
+
+@app_blueprint.route("/retrieve")
+def getInfo():
+    collection = db.get_collection('Tour')
+    result = operations.Read(collection)
+    result_json = json_util.dumps(result, default=str)
+    return jsonify(result_json)
 
 if __name__ == "__main__":
     app_blueprint.run(debug=True)

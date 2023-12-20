@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from app_blueprint import app_blueprint
 
 app = Flask(__name__, static_folder="./static")
