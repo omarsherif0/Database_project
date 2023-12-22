@@ -4,7 +4,6 @@
     <title>CRUDER</title>
     {% endblock title %}
     {% block content %}
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-2 col-lg-3 col-xl-2 sidebar bg-light py-4">
@@ -102,12 +101,30 @@
                                     <td>{{tour.Date}}</td>
                                     <td>{{tour.Location}}</td>
                                     <td>{{tour.Duration}}</td>
-                                    <td>{{tour.Cost}}</td>
-                                    <td>{{tour.Availability}}</td>
+                                    <td>{{tour.Cost}}$</td>
+                                    <td>{{tour.Availability}} seats</td>
                                 </tr>  
                                 {%endfor%} 
                             </tbody>
                         </table>
+
+                        <script>
+                            $(document).ready(function() {
+                                $('#data-table').on('click', '#editButton', function(){
+                                    var row = $(this).closest('tr');
+                                    var rowIndex = row.index() + 1;
+                                    var cells = row.find('td');
+                        
+                                    var rowData = {
+                                        Tour_operator: cells.eq(0).text(),
+                                        Location: cells.eq(2).text()
+                                    };
+                        
+                                    alert('You clicked "Edit" button in row ' + rowIndex + ' with data: ' + JSON.stringify(rowData));
+                                });
+                            });
+                        </script>
+
                     </div>
                 </div>
             </main>
