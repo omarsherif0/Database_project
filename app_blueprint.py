@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, jsonify, url_for, redirect
 from flask_cors import CORS
 from db import Database
+from bson import Binary
 import base64
 from db_operations_ import Operations
-from PIL import Image
-from io import BytesIO
+import os
+
 
 app_blueprint = Blueprint('app_blueprint',__name__)
 CORS(app_blueprint, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
@@ -13,7 +14,7 @@ CORS(app_blueprint, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
 db = Database()
 operations = Operations()
 checkBoxes = 3
-
+UPLOAD_FOLDER = 'Test'
 # images = []
 collection = db.get_collection('Tour')
 tours = operations.Read(collection)
@@ -78,6 +79,40 @@ def process_input():
         form_data = dict(request.args)
         return jsonify(form_data)
     return jsonify({'error': 'Invalid request method'})
+
+@app_blueprint.route('/upload', methods=['GET'])
+def upload():
+    return render_template("test.html")
+
+
+@app_blueprint.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return 'No file part'
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return 'No selected file'
+
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+    file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(file_path) 
+
+    with open(file_path, 'rb') as image_file:
+        base64_image = base64.b64encode(image_file.read()).decode('utf-8')
+
+    file_data = {
+        'image': Binary(base64.b64decode(base64_image)),
+        'file_name': file.filename,
+    }
+
+    collection = db.get_collection('Tour')
+    result = operations.Create(collection, file_data)
+
+    return result
+    
 
 if __name__ == "__main__":
     app_blueprint.run(debug=True, threaded=False)
