@@ -94,7 +94,7 @@
                                     <th>Availability</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
                                 {%for tour in tours%}
                                 <tr>
                                     <td>{{tour.Tour_operator}}</td>
@@ -109,20 +109,85 @@
                         </table>
 
                         <script>
-                            $(document).ready(function() {
-                                $('#data-table').on('click', '#editButton', function(){
-                                    var row = $(this).closest('tr');
-                                    var rowIndex = row.index() + 1;
-                                    var cells = row.find('td');
-                        
-                                    var rowData = {
-                                        Tour_operator: cells.eq(0).text(),
-                                        Location: cells.eq(2).text()
-                                    };
-                        
-                                    alert('You clicked "Edit" button in row ' + rowIndex + ' with data: ' + JSON.stringify(rowData));
+                            $(document).ready(function(){
+                            $('#data-table').on('click', '#editButton', function(event){
+
+                                event.preventDefault();
+
+                                var row = $(this).closest('tr');
+                                var cells = row.find('td');
+
+                                var tourOperator = cells.eq(0).text();
+                                var location = cells.eq(2).text();
+                                
+                                // Use the data in the URL as query parameters
+                                var url = `/edit?Tour_operator=${encodeURIComponent(tourOperator)}&Location=${encodeURIComponent(location)}`;
+
+                                $.ajax({
+                                    url: url,
+                                    type: 'GET',
+                                    contentType: 'application/json;charset=UTF-8',
+                                    success: function(response) {
+                                        console.log(response);
+
+                                        var dataToSend = {
+                                            Tour_operator: tourOperator,
+                                            Location: location
+                                        };
+
+                                        // Convert data to URL parameters
+                                        var queryParams = $.param(dataToSend);
+                                        window.location.href =  "http://127.0.0.1:5000/edit?" + queryParams;
+
+                                    },
+                                    error: function(error) {
+                                        console.error("Error: " + error);
+                                    }
                                 });
                             });
+                        });
+                        
+
+                        ///////////////////////////////////////////////////////////////////////
+
+                        $(document).ready(function(){
+                            $('#data-table').on('click', '#deleteButton', function(event){
+
+                                event.preventDefault();
+
+                                var row = $(this).closest('tr');
+                                var cells = row.find('td');
+
+                                var tourOperator = cells.eq(0).text();
+                                var location = cells.eq(2).text();
+                                
+                                // Use the data in the URL as query parameters
+                                var url = `/delete?Tour_operator=${encodeURIComponent(tourOperator)}&Location=${encodeURIComponent(location)}`;
+
+                                $.ajax({
+                                    url: url,
+                                    type: 'GET',
+                                    contentType: 'application/json;charset=UTF-8',
+                                    success: function(response) {
+                                        console.log(response);
+
+                                        var dataToSend = {
+                                            Tour_operator: tourOperator,
+                                            Location: location
+                                        };
+
+                                        // Convert data to URL parameters
+                                        var queryParams = $.param(dataToSend);
+                                        window.location.href =  "http://127.0.0.1:5000/delete?" + queryParams;
+
+                                    },
+                                    error: function(error) {
+                                        console.error("Error: " + error);
+                                    }
+                                });
+                            });
+                        });
+
                         </script>
 
                     </div>

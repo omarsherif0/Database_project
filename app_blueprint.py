@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, url_for, redirect
+from flask_cors import CORS
 from db import Database
 import base64
 from db_operations_ import Operations
@@ -6,6 +7,7 @@ from PIL import Image
 from io import BytesIO
 
 app_blueprint = Blueprint('app_blueprint',__name__)
+CORS(app_blueprint, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
 
 #Variables
 db = Database()
@@ -40,15 +42,31 @@ def posts():
     tours = operations.Read(collection)
     return render_template("posts.html", tours=tours)
 
-@app_blueprint.route("/edit")
+@app_blueprint.route("/delete")
+def delete():
+    tour_operator = request.args.get('Tour_operator')
+    collection.delete_one({"Tour_operator": tour_operator})
+    return redirect(url_for("app_blueprint.posts"))
+
+@app_blueprint.route("/edit", methods=["GET"])
 def edit():
-    tour_operater = "Tigen"
-    location = "Giza"
-    query = {'Tour_operator': tour_operater, "Location": location}
-    doc = collection.find_one(query)
-    binary_data = doc['image']
-    image2 = base64.b64encode(binary_data).decode('utf-8')
-    return render_template("edit.html", checkBoxes=checkBoxes, image2=image2)
+    tour_operator = request.args.get('Tour_operator')
+    location = request.args.get('Location')
+
+    query = {'Tour_operator': tour_operator, 'Location': location}
+
+    document = collection.find_one(query)
+
+    if document:
+        try:
+            binary_data = document['image']
+            image_ = base64.b64encode(binary_data).decode('utf-8')
+            return render_template("edit.html", checkBoxes=checkBoxes, image=image_)
+        except KeyError as e:
+            return jsonify({'error': f'Missing key in document: {str(e)}'})
+    else:
+        return jsonify({'error': 'Document not found'})
+        
 
 @app_blueprint.route("/new")
 def new():
@@ -62,4 +80,4 @@ def process_input():
     return jsonify({'error': 'Invalid request method'})
 
 if __name__ == "__main__":
-    app_blueprint.run(debug=True)
+    app_blueprint.run(debug=True, threaded=False)
