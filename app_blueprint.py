@@ -14,14 +14,7 @@ CORS(app_blueprint, resources={r"/*": {"origins": "http://127.0.0.1:5000"}})
 db = Database()
 operations = Operations()
 checkBoxes = 3
-UPLOAD_FOLDER = 'Test'
-# images = []
-collection = db.get_collection('Tour')
-tours = operations.Read(collection)
-# for tour in tours:
-#     image_attribute = tour.get('image')
-#     image = Image.open(BytesIO(image_attribute))
-#     images.append(image)  
+UPLOAD_FOLDER = 'database_images'
 
 
 @app_blueprint.route("/")
@@ -45,12 +38,14 @@ def posts():
 
 @app_blueprint.route("/delete")
 def delete():
+    collection = db.get_collection('Tour')
     tour_operator = request.args.get('Tour_operator')
     collection.delete_one({"Tour_operator": tour_operator})
     return redirect(url_for("app_blueprint.posts"))
 
 @app_blueprint.route("/edit", methods=["GET"])
 def edit():
+    collection = db.get_collection('Tour')
     tour_operator = request.args.get('Tour_operator')
     location = request.args.get('Location')
 
@@ -80,18 +75,7 @@ def process_input():
         return jsonify(form_data)
     return jsonify({'error': 'Invalid request method'})
 
-@app_blueprint.route('/upload', methods=['GET'])
-def upload():
-    return render_template("test.html")
-
-
-@app_blueprint.route('/upload', methods=['GET', 'POST'])
-def upload_file():
-    if 'file' not in request.files:
-        return 'No file part'
-
-    file = request.files['file']
-
+def process_image(file):
     if file.filename == '':
         return 'No selected file'
 
@@ -102,16 +86,28 @@ def upload_file():
 
     with open(file_path, 'rb') as image_file:
         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
+    return Binary(base64.b64decode(base64_image))
 
+@app_blueprint.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return 'No file part'
+    else:
+        image = process_image(request.files['file'])
+
+    form_data = {**request.form.to_dict(), **request.args.to_dict()}
     file_data = {
-        'image': Binary(base64.b64decode(base64_image)),
-        'file_name': file.filename,
+        'Tour_operator': form_data.get('Tour_operator', 'test'),
+        'image': image,
+        'Duration': form_data.get('duration', 'test'),
+        'Location': form_data.get('location', 'test'),
+        'Date': form_data.get('date', 'test'),
+        'Cost': form_data.get('Cost', 'test'),
+        'Availability': form_data.get('Availability', '5')
     }
-
     collection = db.get_collection('Tour')
-    result = operations.Create(collection, file_data)
-
-    return result
+    operations.Create(collection, file_data)
+    return redirect(url_for("app_blueprint.posts"))
     
 
 if __name__ == "__main__":
