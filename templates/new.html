@@ -151,11 +151,4 @@
             </main>
         </div>
     </div>
-    <script>
-        let profilePic = document.getElementById("tour-image");
-        let inputFile = document.getElementById("customFile");
-        inputFile.onchange = function(){
-            profilePic.src = URL.createObjectURL(inputFile.files[0]);
-        }
-    </script>
     {% endblock content %}
