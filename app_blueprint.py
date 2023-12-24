@@ -62,18 +62,36 @@ def edit():
             return jsonify({'error': f'Missing key in document: {str(e)}'})
     else:
         return jsonify({'error': 'Document not found'})
-        
-
+ 
+@app_blueprint.route("/edit_form", methods=['POST'])
+def update():
+    property_names = ['Tour_operator', 'Duration', 'Location', 'Date', 'Cost', 'Availability']
+    file_data = {}
+    if 'file' in request.files:
+        image = process_image(request.files['file'])
+        file_data['image'] = image
+    form_data = {**request.form.to_dict(), **request.args.to_dict()}
+    #return jsonify(form_data)
+    # Loop through the property names and include them in file_data if they have a value
+    for prop_name in property_names:
+        prop_value = form_data.get(prop_name)
+        if prop_value:
+            file_data[prop_name] = prop_value
+    tour_operator = form_data['currentOperator']
+    location = form_data['currentLocation']
+    query = {'Tour_operator': tour_operator, 'Location': location}
+    #return jsonify(query)
+    newvalues = { "$set": file_data }
+    collection = db.get_collection('Tour')
+    try:
+        collection.update_one(query, newvalues)
+        return redirect(url_for("app_blueprint.posts"))
+    except Exception as e:
+        return f'Insertion failed with error: {e}'
+    
 @app_blueprint.route("/new")
 def new():
-    return render_template("new.html",checkBoxes=checkBoxes)
-
-@app_blueprint.route('/process_form', methods=['GET'])
-def process_input():
-    if request.method == 'GET':
-        form_data = dict(request.args)
-        return jsonify(form_data)
-    return jsonify({'error': 'Invalid request method'})
+    return render_template("new.html")
 
 def process_image(file):
     if file.filename == '':

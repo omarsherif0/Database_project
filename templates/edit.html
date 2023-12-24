@@ -92,11 +92,11 @@
                         </div>
                     </div>
                     <div class="content-wrapper px-3 table-responsive-sm">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="/edit_form" method="POST" enctype="multipart/form-data" id="editForm">
                             <div class="form-group row">
                                 <label for="customFile" class="col-sm-2 col-form-label" id="random_image">Photo</label>
                                 <div class="custom-file col-md-5">
-                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <input type="file" class="custom-file-input" id="customFile" name="file" accept=".jpg, .png">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                                 <div class="offset-md-2 col-md-5">
@@ -104,20 +104,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-2 col-form-label">Tour operator</label>
+                                <label for="inputoperator" class="col-sm-2 col-form-label">Tour operator</label>
                                 <div class="col-md-5">
-                                    <select class="custom-select" name="Selected">
-                                        <option selected>Tour operators names</option>
-                                        <option value="1" name="1">One</option>
-                                        <option value="2" name="2">Two</option>
-                                        <option value="3" name="3">Three</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="Tour_operator" name="Tour_operator">
+                                    <input type="text" class="form-control" id="operatTest" name="currentOperator" style="display: none;">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Date</label>
                                 <div class="col-md-5">
-                                    <input type="date" class="form-control" id="inputdate" placeholder="date" name="date">
+                                    <input type="date" class="form-control" id="inputdate" placeholder="date" name="Date">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -129,7 +125,7 @@
                             <div class="form-group row">
                                 <label for="inputduraion" class="col-sm-2 col-form-label">Duration</label>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" id="duration" placeholder="Duration in hours" name="duration">
+                                    <input type="text" class="form-control" id="duration" placeholder="Duration in hours" name="Duration">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -141,11 +137,12 @@
                             <div class="form-group row">
                                 <label for="inputlocation" class="col-sm-2 col-form-label">Location</label>
                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" id="location" placeholder="eg. Giza" name="location">
+                                    <input type="text" class="form-control" id="location" placeholder="eg. Giza" name="Location">
+                                    <input type="text" class="form-control" id="loc" name="currentLocation" style="display: none;">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-5 offset-md-2" display="none">
+                                <div class="col-md-5 offset-md-2">
                                     <div class="alert alert-success" role="alert" style="display: none;" id="Success">
                                         Success alert !
                                     </div>
@@ -167,5 +164,22 @@
         inputFile.onchange = function(){
             profilePic.src = URL.createObjectURL(inputFile.files[0]);
         }
+        var urlParamsString = window.location.search;
+
+        // Create a URLSearchParams object
+        var urlParams = new URLSearchParams(urlParamsString);
+
+        // Access individual parameters
+        var tourOperator = urlParams.get('Tour_operator');
+        var locationDecoded = urlParams.get('Location');
+        var locationRaw = urlParams.get('Location');
+
+        // Output parameter values
+        console.log("Tour Operator:", tourOperator);
+        console.log("Location (Decoded):", locationDecoded);
+        var locInput = document.getElementById('loc');
+        locInput.value = locationDecoded;
+        var operatorInput = document.getElementById('operatTest');
+        operatorInput.value = tourOperator;
     </script>
     {% endblock content %}
