@@ -22,10 +22,21 @@ def index():
     return render_template("login.html")
 
 
+@app_blueprint.route("/backtologin", methods=["POST", "GET"])
+def back_to_login():
+    form_data = {**request.form.to_dict(), **request.args.to_dict()}
+    user_data = {
+        'email': form_data.get('email', 'test'),
+        'password': form_data.get('password', 'test'),
+        'username': form_data.get('username', 'test'),
+    }
+    operations.Create(db.get_collection('Users'), user_data)
+    return redirect(url_for("app_blueprint.index"))
+
 @app_blueprint.route("/signup")
 def signup():
     return render_template("signup.html")
-
+    
 @app_blueprint.route("/index")
 def dashboard():
     return render_template("index.html")
