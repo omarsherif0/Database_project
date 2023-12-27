@@ -45,7 +45,11 @@ def dashboard():
 def posts():
     collection = db.get_collection('Tour')
     tours = operations.Read(collection)
-    return render_template("posts.html", tours=tours)
+
+    max_cost = int(request.args.get('maxCost', 0))
+    filtered_tours = [tour for tour in tours if int(tour.get('Cost', 0)) <= max_cost]
+
+    return render_template("posts.html", tours=filtered_tours, maxCost=max_cost)
 
 @app_blueprint.route("/delete")
 def delete():

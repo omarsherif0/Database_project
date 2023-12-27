@@ -1,7 +1,7 @@
 {% extends "layout.html"%}    
 
     {% block title %}
-    <title>CRUDER</title>
+    <title>Tourism</title>
     {% endblock title %}
     {% block content %}
     <div class="container-fluid">
@@ -82,6 +82,11 @@
                             <a href="new" class="btn btn-sm btn-info">Add New</a>
                         </div>
                     </div>
+                    <form id="filterForm">
+                        <label for="maxCost">Max Cost:</label>
+                        <input type="number" id="maxCost" name="maxCost" min="0" step="1">
+                        <button type="button" id="applyFilter" class="btn btn-sm btn-primary">Apply Filter</button>
+                    </form>
                     <div class="content-wrapper table-responsive-sm">
                         <table class="table table-striped" id="data-table">
                             <thead>
@@ -96,14 +101,17 @@
                             </thead>
                             <tbody> 
                                 {%for tour in tours%}
-                                <tr>
-                                    <td>{{tour.Tour_operator}}</td>
-                                    <td>{{tour.Date}}</td>
-                                    <td>{{tour.Location}}</td>
-                                    <td>{{tour.Duration}} hours</td>
-                                    <td>{{tour.Cost}}$</td>
-                                    <td>{{tour.Availability}} seats</td>
-                                </tr>  
+                                    {% set tour_cost = tour.Cost | int %}
+                                    {% if tour_cost < maxCost %}
+                                    <tr>
+                                        <td>{{tour.Tour_operator}}</td>
+                                        <td>{{tour.Date}}</td>
+                                        <td>{{tour.Location}}</td>
+                                        <td>{{tour.Duration}} hours</td>
+                                        <td>{{tour.Cost}}$</td>
+                                        <td>{{tour.Availability}} seats</td>
+                                    </tr>  
+                                    {% endif %}
                                 {%endfor%} 
                             </tbody>
                         </table>
@@ -187,9 +195,23 @@
                                 });
                             });
                         });
+                        
 
+                        $(document).ready(function () {
+                            $('#applyFilter').on('click', function () {
+                                var maxCost = parseInt($('#maxCost').val()) || 0;
+                                console.log(maxCost)
+                                // Loop through rows and show/hide based on the cost filter
+                                $('#data-table tbody tr').each(function () {
+                                    var cost = parseInt($(this).find('td:eq(4)').text().replace('$', '')) || 0;
+                                    console.log('cost: ' + cost);
+
+                                    // Use toggle() to show/hide rows based on the condition
+                                    $(this).toggle(cost <= maxCost || !maxCost);
+                                });
+                            });
+                        });
                         </script>
-
                     </div>
                 </div>
             </main>
